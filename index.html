@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для Полиночки</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #ffb6c1;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Плеер сверху */
+        .audio-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+            border-bottom: 1px solid #ffb6c1;
+        }
+
+        /* Контейнер для блоков (песня) */
+        #content-wrapper {
+            margin-top: 100px;
+            width: 90%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            padding-bottom: 100px;
+        }
+
+        .moment {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1.5s ease;
+        }
+
+        .moment.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Шахматный порядок */
+        .moment:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .moment img {
+            width: 45%;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+        }
+
+        .text-part {
+            width: 55%;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.4rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        /* Стили для выделения */
+        .highlight {
+            font-weight: bold;
+            color: #ff69b4;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+            font-size: 1.6rem;
+        }
+
+        /* Динамичная анимация (пульсация) */
+        .dynamic {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); text-shadow: 0 0 20px #ff69b4; }
+            100% { transform: scale(1); }
+        }
+
+        /* Финальное письмо */
+        #final-letter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: #ffb6c1;
+            opacity: 0;
+            display: none;
+            transition: opacity 3s ease;
+            z-index: 2000;
+        }
+
+        /* Сердечки */
+        .heart {
+            position: fixed;
+            color: #ff69b4;
+            font-size: 20px;
+            user-select: none;
+            z-index: -1;
+            pointer-events: none;
+                        animation: moveHeart 5s linear infinite;
+        }
+
+        @keyframes moveHeart {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            .moment { flex-direction: column !important; }
+            .moment img, .text-part { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="audio-container">
+    <audio id="track" controls>
+        <source src="1.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+<div id="content-wrapper">
+    <!-- Блок 1 -->
+    <div class="moment" id="m1">
+        <img src="1.jpg" alt="">
+        <div class="text-part">
+            Я знаю, ты понимаешь, как мне плохо сейчас<br>
+            И я почти себя убил, но ты пришла в нужный час<br>
+            Ты знаешь больше обо мне, чем я сам представляю<br>
+            И лишь тебя я как хорошее воспринимаю
+        </div>
+    </div>
+
+    <!-- Блок 2 -->
+    <div class="moment" id="m2">
+        <img src="2.jpg" alt="">
+        <div class="text-part">
+            Луна согреет и покажет нам с тобой куда плыть<br>
+            Она научит нас смеяться, ненавидеть, любить<br>
+            Ты хочешь быть немного лучше, но со мною никак<br>
+            <span class="highlight">Прости меня, что я такой мудак</span>
+        </div>
+    </div>
+
+    <!-- Блок 3 -->
+    <div class="moment dynamic" id="m3">
+        <img src="3.jpg" alt="">
+        <div class="text-part">
+            Ещё одну бессонную ночь я посвящаю тебе<br>
+            Луна исчезнет во тьме, а я останусь здесь жить<br>
+            Как-то надо, и я в живых оставлю себя<br>
+            Лишь для того, чтоб тебя <span class="highlight">любить</span>
+        </div>
+    </div>
+
+    <!-- Блок 4 -->
+    <div class="moment" id="m4">
+        <img src="4.jpg" alt="">
+        <div class="text-part">
+            Я знаю, ты понимаешь, как мне плохо сейчас<br>
+            Постоянная грусть — да это жизнь для нас<br>
+            Остальных я не вижу — не различаю цвета<br>
+            Я перестал ненавидеть — наверное, просто устал
+        </div>
+    </div>
+
+    <!-- Блок 5 -->
+    <div class="moment" id="m5">
+        <img src="5.jpg" alt="">
+        <div class="text-part">
+            И, наверное, из нас двоих слабее я<br>
+            Хотя меня меньше заботит вся людская хуйня<br>
+            Ты хочешь быть немного лучше, но со мною никак<br>
+            <span class="highlight">Прости меня, что я такой мудак</span>
+        </div>
+    </div>
+
+    <!-- Блок 6 -->
+    <div class="moment dynamic" id="m6">
+        <img src="6.jpg" alt="">
+        <div class="text-part">
+            Ещё одну бессонную ночь я посвящаю тебе<br>
+            Луна исчезнет во тьме, а я останусь здесь жить<br>
+            Как-то надо, и я в живых оставлю себя<br>
+            Лишь для того, чтоб тебя <span class="highlight">любить</span>
+        </div>
+    </div>
+
+    <!-- Блок 7 -->
+    <div class="moment" id="m7">
+        <img src="7.jpg" alt="">
+        <div class="text-part">
+            Ещё одну бессонную ночь я посвящаю тебе<br>
+            Луна исчезнет во тьме, а я останусь здесь жить<br>
+            Как-то надо, и я в живых оставлю себя<br>
+            Лишь для того, чтоб тебя любить
+        </div>
+    </div>
+
+    <!-- Блок 8 -->
+    <div class="moment" id="m8">
+        <img src="8.jpg" alt="">
+        <div class="text-part">
+            Ещё одну бессонную ночь я посвящаю тебе<br>
+            И если хочешь покончить со мной, так давай<br>
+            Всё рaвно больше нет<br>
+            Ничего больше нет, что могло бы меня здесь удержать
+        </div>
+    </div>
+</div>
+
+<div id="final-letter">
+      Полиночка, я тебя очень сильно люблю, с годовщиной, я безумна рада что я с тобой год назад познакомилась, очень рада что ты есть, ты очень интересный собеседник, многогранный человек, которого очень хочется узнать ближе и понять, ты очень милая, красивая, веселая, мне очень нравится тебя слушать, когда ты говоришь о своих чувствах, о себе, доверяешься мне, я это ценю, не знаю сколько мы ещё таких годовщин встретим, но я точно не хочу чтобы это была последняя <br><br>
+    <span style="font-size: 2.2rem;">С любовью, моей любимой Полиночке</span>
+</div>
+
+<script>
+    const audio = document.getElementById('track');
+    const moments = [
+        { id: 'm1', time: 1 },
+        { id: 'm2', time: 21 },
+        { id: 'm3', time: 38 },
+        { id: 'm4', time: 56 },
+        { id: 'm5', time: 73 }, // 1:14
+        { id: 'm6', time: 90 }, // 1:33
+        { id: 'm7', time: 123 }, // 2:09
+        { id: 'm8', time: 142 }  // 2:23
+    ];
+    const finalTime = 167; // 2:47
+
+    audio.onplay = function() {
+        startHearts();
+        checkTime();
+    };
+
+    function checkTime() {
+        setInterval(() => {
+            const currentTime = audio.currentTime;
+
+            // Показ блоков текста и фото
+            moments.forEach(m => {
+                if (currentTime >= m.time) {
+                    const el = document.getElementById(m.id);
+                    el.classList.add('active');
+                    // Плавный скролл к новому элементу
+                    if (currentTime < m.time + 1) {
+                        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            });
+
+            // Финал
+            if (currentTime >= finalTime) {
+                document.getElementById('content-wrapper').style.display = 'none';
+                const final = document.getElementById('final-letter');
+                final.style.display = 'block';
+                setTimeout(() => final.style.opacity = '1', 100);
+            }
+        }, 500);
+    }
+
+    function startHearts() {
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }, 300);
+    }
+</script>
+
+</body>
+</html>
